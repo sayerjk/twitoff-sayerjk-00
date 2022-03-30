@@ -12,6 +12,7 @@ flake8 = "*"
 tweepy = "*"
 spacy = "3.13"
 python-dotenv = "*"
+scikit-learn = "*"
 
 [dev-packages]
 
