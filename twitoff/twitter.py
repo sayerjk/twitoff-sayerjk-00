@@ -13,9 +13,7 @@ TWITTER_AUTH = tweepy.OAuthHandler(key, secret)
 # Open a connection to the API
 TWITTER = tweepy.API(TWITTER_AUTH)
 
-'''
-NEED TO DEBUG THIS FUNCTION 11am 3/29/22
-'''
+
 def add_or_update_user(username):
     try:
         # GET user data from Twitter
