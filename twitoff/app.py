@@ -46,7 +46,9 @@ def create_app():
         sayer = User(id=1, username='sayer')
         neo = User(id=2, username='neo')
 
-        tweet1 = Tweet(id=1, text='Wow...', user=sayer, vect=tweet1_vector)        
+        tweet1 = Tweet(
+            id=1, text='Wow...', 
+            user=sayer, vect=tweet1_vector)        
         tweet2 = Tweet(
             id=2, text='Woah...',
             user=neo, vect=tweet2_vector)
