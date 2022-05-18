@@ -16,18 +16,21 @@ TWITTER = tweepy.API(TWITTER_AUTH)
 
 def add_or_update_user(username):
     try:
-        # GET user data from Twitter
+        # Use Twitter API to access live feed of Tweets from a given username
         twitter_user = TWITTER.get_user(screen_name=username)
 
         # Check to see if user is in database
-        # if User in DB, do nothing
-        # if User not in DB, insert into DB
+        # if User in DB, do nothing OR
+        # if User not in DB, get UserID and add to db_user object w/ username
         db_user = (
             User.query.get(twitter_user.id) or 
             User(id=twitter_user.id, username=username)
         )
 
+        # db_user assigned from Twitter API, 
+        # now add to SQLAlchemy / flask database
         DB.session.add(db_user)
+
 
         tweets = twitter_user.timeline(
             count=200, 
@@ -42,7 +45,9 @@ def add_or_update_user(username):
 
         # add the individual tweets to the DB
         for tweet in tweets:
-            tweet_vector = vectorize_tweet(tweet.full_text)
+            tweet_vector = vectorize_tweet(tweet.full_text) # vect conversion
+            
+            # creating Tweet for database one at a time
             db_tweet = Tweet(
                 id=tweet.id, 
                 text=tweet.full_text[:300],
