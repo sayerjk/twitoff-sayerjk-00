@@ -6,7 +6,6 @@ from .twitter import add_or_update_user, vectorize_tweet
 
 
 def create_app():
-
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -14,20 +13,16 @@ def create_app():
 
     @app.route("/")
     def home():
-
         users = User.query.all()
         print(users, flush=True)
-
         return render_template('base.html', title="home", users=users)
 
     @app.route("/another")
     def another():
-
         return render_template('base.html', title='another')
 
     @app.route('/reset')
     def reset():
-
         DB.drop_all()
         DB.create_all()
         tweet1_vector = vectorize_tweet('Wow...')
@@ -38,12 +33,10 @@ def create_app():
         DB.session.add(sayer)
         DB.session.add(tweet1)
         DB.session.commit()
-
         return render_template('base.html', title='Reset DB')
 
     @app.route('/update')
     def update():
-
         usernames = [usr.username for usr in User.query.all()]
         for username in usernames:
             add_or_update_user(username)
@@ -52,20 +45,16 @@ def create_app():
     @app.route('/user', methods=['POST'])
     @app.route('/user/<username>', methods=['GET'])
     def user(username=None, message=''):
-
         if request.method == 'GET':
             tweets = User.query.filter(User.username==username).one().tweets
-
         if request.method == 'POST':
             tweets = []
             try:
                 username = request.values['user_name']
                 add_or_update_user(username)
                 message = f'User "{username}" was successfully added.'
-
             except Exception as e:
                 message = f'Error adding {username}: {e}'
-
         return render_template(
             'user.html',
             title=username,
@@ -75,7 +64,6 @@ def create_app():
 
     @app.route('/compare', methods=['POST'])
     def compare():
-
         user0 = request.values['user0']
         user1 = request.values['user1']
         if user0 == user1:
@@ -88,7 +76,6 @@ def create_app():
                 user1 if prediction else user0, 
                 user0 if prediction else user1
                 )
-
         return render_template('prediction.html', title='Prediction', message=message)
 
     return app
