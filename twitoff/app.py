@@ -24,7 +24,7 @@ def create_app():
         tweet1_vector = vectorize_tweet('Wow...')
         sayer = User(id=1, username='sayer')
         tweet1 = Tweet(
-            id=1, text='Wow...', 
+            id=1, text='Wow...',
             user=sayer, vect=tweet1_vector)
         DB.session.add(sayer)
         DB.session.add(tweet1)
@@ -42,7 +42,7 @@ def create_app():
     @app.route('/user/<username>', methods=['GET'])
     def user(username=None, message=''):
         if request.method == 'GET':
-            tweets = User.query.filter(User.username==username).one().tweets
+            tweets = User.query.filter(User.username == username).one().tweets
         if request.method == 'POST':
             tweets = []
             try:
@@ -56,7 +56,7 @@ def create_app():
             title=username,
             tweets=tweets,
             message=message
-            )
+        )
 
     @app.route('/compare', methods=['POST'])
     def compare():
@@ -65,13 +65,13 @@ def create_app():
         if user0 == user1:
             message = 'Cannot compare a user to themselves'
         else:
-            text = request.values['tweet_text']            
+            text = request.values['tweet_text']
             prediction = predict_user(user0, user1, text)
             message = '"{}" is more likely to be said by {} than {}.'.format(
-                text, 
-                user1 if prediction else user0, 
+                text,
+                user1 if prediction else user0,
                 user0 if prediction else user1
-                )
+            )
         return render_template('prediction.html', title='Prediction', message=message)
 
     return app
