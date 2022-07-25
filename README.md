@@ -9,7 +9,7 @@
  
  - `twitter.py`: Accesses twitter api to get add new users to the database from given user input. Checks to see if user is already in the database. Denotes current tweet ID for later reference when checking for updates. Also provides `vectorize_tweet()` function which applies Spacy vectorizations. 
  
- - `app.py`: Provides deployed Flask URL endpoints for viewing user tweets, resetting database, adding users to the database, updating existing users' tweets, and comparing users to generate a prediction for output.
+ - `app.py`: Provides deployed [Flask](https://flask.palletsprojects.com/en/2.1.x/) URL endpoints for viewing user tweets, resetting database, adding users to the database, updating existing users' tweets, and comparing users to generate a prediction for output.
 
 
 ![Twitter](https://pbs.twimg.com/profile_images/1488548719062654976/u6qfBBkF_400x400.jpg)
