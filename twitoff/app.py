@@ -17,10 +17,6 @@ def create_app():
         print(users, flush=True)
         return render_template('base.html', title="home", users=users)
 
-    @app.route("/another")
-    def another():
-        return render_template('base.html', title='another')
-
     @app.route('/reset')
     def reset():
         DB.drop_all()
