@@ -1,6 +1,6 @@
 # Twitter NLP Web Application
 
-The purpose of the app is to train a model based on any two given Twitter users tweets. Upon receiving new, unseen text, the model will predict who was more likely to have written the text by comparing vectorized versions of each user's body of tweets.
+The purpose of the app is to train a model based on any two given Twitter users tweets. Upon receiving new, unseen text, the model will predict *who was more likely to have written the text* by comparing vectorized versions of each user's body of tweets.
 
 - Access the [Twitter API](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api)
    - Apply for elevated status to allow higher volume of tweets per month. 
